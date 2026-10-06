@@ -1,7 +1,7 @@
 # Global Agent Rules
 
 These rules apply to every opencode session. They are loaded alongside any
-repo-local `AGENTS.md` or `CLAUDE.md` found by walking up from the working
+repo-local `AGENTS.md` found by walking up from the working
 directory — nothing here is meant to override project-specific rules
 silently. See section 8 for how conflicts are handled.
 
@@ -121,7 +121,7 @@ needed, surface it to the user so it goes into the home-manager flake.
 ## 8. Layering and conflict resolution with local AGENTS.md
 
 When working inside a repo, opencode loads instruction files in this order:
-1. Repo-local `AGENTS.md` (walking up from cwd), else `CLAUDE.md`
+1. Repo-local `AGENTS.md` (walking up from cwd)
 2. This global `~/.config/opencode/AGENTS.md`
 
 Both are read in full. They are layered, not mutually exclusive — the global
