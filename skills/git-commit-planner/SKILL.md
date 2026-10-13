@@ -102,7 +102,7 @@ Format:
 
 <optional body>
 
-Co-authored-by: <tool>/<model>
+Co-authored-By: $tool AI Agent <$tool@users.noreply.local>
 ```
 
 Examples:
@@ -110,24 +110,17 @@ Examples:
 ```
 feat(inventory): add cmdb distance sorting
 
-Co-authored-by: opencode/qwen3.8-27b
+Co-authored-by: Pi AI Agent <pi@users.noreply.local>
 ```
 
 ```
 fix: handle missing os_version in post-run table
 
-Co-authored-by: opencode/qwen3.8-27b
+Co-authored-by: OpenCode AI Agent <opencode@users.noreply.local>
 ```
 
-```
-refactor: extract haversine helper
-
-Co-authored-by: opencode/qwen3.8-27b
-```
-
-Always use the form `Co-authored-by: <tool>/<model>` — fill in the
-actual tool name (e.g. `opencode`) and the actual model identifier (e.g.
-`qwen3.8-27b`, `minimax-m3`). Do not use `Assisted-by:` and do not omit
+Always use the form `Co-authored-by: $tool AI Agent <$tool@users.noreply.local>` — fill in the
+actual tool name (e.g. `OpenCode` or `Pi`). Do not use `Assisted-by:` and do not omit
 either segment.
 
 If a human authored every line, omit the trailer.
