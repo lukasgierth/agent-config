@@ -20,6 +20,7 @@ Personal configuration for AI coding agents (opencode). Contains the global
 | `git-commit-planner` | Split uncommitted changes into small focused conventional commits; always asks before committing. |
 | `release-notes` | Draft human-readable release notes from a git tag range, grouped by conventional commit type. |
 | `update-nix-packages` | Bump custom derivations under a flake's `packages/` to latest upstream via `nix-update`. |
+| `update-docs` | Keep Markdown docs in sync with the repo: root `AGENTS.md`/`README.md`, subfolder docs, and new READMEs for undocumented code. |
 
 ## Install
 
