@@ -11,6 +11,26 @@ Review all uncommitted changes, group them into small, focused commits, and crea
 
 ## Workflow
 
+### 0. Git environment (always)
+
+The host sandbox can block the system git config, and git then aborts with
+`fatal: unknown error occurred while reading the configuration files`. Before
+running any git command in any shell, set:
+
+```bash
+export GIT_CONFIG_NOSYSTEM=1
+export GIT_CONFIG_GLOBAL="$HOME/.config/git/config"
+```
+
+- `GIT_CONFIG_NOSYSTEM=1` — never read the system config (`/etc/gitconfig`).
+- `GIT_CONFIG_GLOBAL` — makes `~/.config/git/config` the only user-level
+  config file. Per `git help config`, this variable is "used instead of all
+  user-level locations", replacing both `~/.gitconfig` and the default XDG
+  lookup. Point it at the real file; never use `/dev/null` or a missing path,
+  or the user identity and `core.hooksPath` are lost.
+- The repo-local `.git/config` is still read — intended. Never create or
+  edit `~/.gitconfig`.
+
 ### 1. Inspect Changes
 
 Run these commands to understand what has changed:
