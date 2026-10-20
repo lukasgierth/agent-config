@@ -1,6 +1,6 @@
 # Global Agent Rules
 
-These rules apply to every opencode session. They are loaded alongside any
+These rules apply to every opencode, pi, and goose session. They are loaded alongside any
 repo-local `AGENTS.md` found by walking up from the working
 directory — nothing here is meant to override project-specific rules
 silently. See section 8 for how conflicts are handled.
@@ -11,9 +11,9 @@ If the working directory is empty or contains no project files (no source,
 no build config, no existing `AGENTS.md`):
 
 1. Stop. Do not start scaffolding on assumption.
-2. Create `AGENTS.md` in the repo root — via `/init` or by drafting one
-   myself — populated with: project name, purpose, stack, build/lint/test
-   commands, layout, conventions.
+2. Create `AGENTS.md` in the repo root — via the tool's init flow (e.g.
+   opencode's `/init`) or by drafting one myself — populated with: project
+   name, purpose, stack, build/lint/test commands, layout, conventions.
 3. Then proceed to planning (section 2).
 
 If the repo already has an `AGENTS.md`, update it in place rather than
@@ -23,7 +23,8 @@ replacing it.
 
 For any non-trivial task — anything more than a single-file edit, a typo
 fix, or a one-line config change — produce a `PLAN.md` at the repo root
-(or `.opencode/PLAN.md` if a repo-local convention exists) containing:
+(or a tool-specific path such as `.opencode/PLAN.md`, if that is the repo
+convention) containing:
 
 - **Goal** — one-paragraph summary of what success looks like.
 - **Scope** — what's in, what's out.
@@ -113,16 +114,20 @@ without re-asking. Approval of task N does not pre-approve task N+1.
 
 ## 7. Nix-managed config awareness
 
-`~/.config/opencode/opencode.json` and `tui.json` are symlinks into the
-Nix store (home-manager). Do not edit them in place — changes will be
-overwritten on the next home-manager switch. If a config change is
-needed, surface it to the user so it goes into the home-manager flake.
+opencode's `~/.config/opencode/` (`opencode.json`, `tui.json`, `AGENTS.md`)
+and pi's `~/.pi/agent/` (`AGENTS.md`, `settings.json`) are symlinks into the
+Nix store (home-manager). goose's `~/.config/goose/AGENTS.md` is not a
+symlink but is copied there by home-manager activation. Do not edit these
+deployed copies in place — they are overwritten on the next home-manager
+switch. Surface a change to the user so it goes into the home-manager flake.
 
 ## 8. Layering and conflict resolution with local AGENTS.md
 
-When working inside a repo, opencode loads instruction files in this order:
+When working inside a repo, opencode, pi, and goose each load instruction
+files in this order:
 1. Repo-local `AGENTS.md` (walking up from cwd)
-2. This global `~/.config/opencode/AGENTS.md`
+2. This global `AGENTS.md` — `~/.config/opencode/AGENTS.md`, `~/.pi/agent/AGENTS.md`,
+   or `~/.config/goose/AGENTS.md` (goose also reads `.goosehints`)
 
 Both are read in full. They are layered, not mutually exclusive — the global
 file is the default behavior, the local file is the project-specific override.

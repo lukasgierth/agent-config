@@ -120,7 +120,7 @@ Co-authored-by: OpenCode AI Agent <opencode@users.noreply.local>
 ```
 
 Always use the form `Co-authored-by: $tool AI Agent <$tool@users.noreply.local>` — fill in the
-actual tool name (e.g. `OpenCode` or `Pi`). Do not use `Assisted-by:` and do not omit
+actual tool name (e.g. `OpenCode`, `Pi`, or `Goose`). Do not use `Assisted-by:` and do not omit
 either segment.
 
 If a human authored every line, omit the trailer.
