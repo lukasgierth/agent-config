@@ -21,10 +21,10 @@ replacing it.
 
 ## 2. Planning workflow (Agile)
 
-For any non-trivial task — anything more than a single-file edit, a typo
-fix, or a one-line config change — produce a `PLAN.md` at the repo root
-(or a tool-specific path such as `.opencode/PLAN.md`, if that is the repo
-convention) containing:
+For **every** task — a single-file edit, a typo fix, and a one-line config
+change included — produce a `PLAN.md` at the repo root (or a tool-specific
+path such as `.opencode/PLAN.md`, if that is the repo convention) before
+touching any file. It contains:
 
 - **Goal** — one-paragraph summary of what success looks like.
 - **Scope** — what's in, what's out.

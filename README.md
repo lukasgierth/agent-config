@@ -39,6 +39,6 @@ Skills are installed once and shared by all three: symlink or copy each
 
 ## Editing rules
 
-Follow the rules in `AGENTS.md` when changing this repo: non-trivial work gets
+Follow the rules in `AGENTS.md` when changing this repo: every edit gets
 a `PLAN.md`, ambiguity goes to `CIR-LOG.md`, and no implementation without
 explicit approval.
