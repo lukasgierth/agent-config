@@ -15,7 +15,7 @@ Personal configuration for AI coding agents — opencode, pi, and goose. Contain
 | Skill | Purpose |
 |-------|---------|
 | `add-tests` | Write tests for a function/module following the repo's existing test style and framework. |
-| `dep-audit` | Detect package manager, check for outdated/vulnerable dependencies, propose update commits. |
+| `dep-audit` | Detect package manager, check for outdated/vulnerable dependencies, update, verify, and propose update commits. |
 | `git-commit-planner` | Split uncommitted changes into small focused conventional commits; always asks before committing. |
 | `release-notes` | Draft human-readable release notes from a git tag range, grouped by conventional commit type. |
 | `update-nix-packages` | Bump custom derivations under a flake's `packages/` to latest upstream via `nix-update`. |
