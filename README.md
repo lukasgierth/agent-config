@@ -17,6 +17,7 @@ Personal configuration for AI coding agents — opencode, pi, and goose. Contain
 | `add-tests` | Write tests for a function/module following the repo's existing test style and framework. |
 | `dep-audit` | Detect package manager, check for outdated/vulnerable dependencies, update, verify, and propose update commits. |
 | `git-commit-planner` | Split uncommitted changes into small focused conventional commits; always asks before committing. |
+| `nixpkgs-package` | Add a package to Nixpkgs, update one you maintain, or register as a maintainer — conventions, hashes, vet, review, AI disclosure. |
 | `release-notes` | Draft human-readable release notes from a git tag range, grouped by conventional commit type. |
 | `update-nix-packages` | Bump custom derivations under a flake's `packages/` to latest upstream via `nix-update`. |
 | `update-docs` | Keep Markdown docs in sync with the repo: root `AGENTS.md`/`README.md`, subfolder docs, and new READMEs for undocumented code. |
