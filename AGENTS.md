@@ -1,9 +1,11 @@
 # Global Agent Rules
 
-These rules apply to every opencode, pi, and goose session. They are loaded alongside any
-repo-local `AGENTS.md` found by walking up from the working
-directory — nothing here is meant to override project-specific rules
-silently. See section 8 for how conflicts are handled.
+**Before any file edit, config change, or dependency install: write `PLAN.md`, then stop
+and wait for explicit human approval.** Read-only work needs no plan. If a task already
+reached an edit without a plan, stop there, say so, and write the plan first.
+
+Applies to every opencode, pi, and goose session, alongside any repo-local `AGENTS.md`
+found walking up from the working directory. Layering and conflicts: section 8.
 
 ## 1. Empty repository handling
 
