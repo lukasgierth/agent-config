@@ -70,32 +70,17 @@ tradeoffs that need a human call — I will:
 
 ## 4. Human gate before implementation
 
-Hard rule: **after `PLAN.md` is finalized but before any code, config, or
-other implementation artifact is written or edited, stop and request
-explicit human approval.**
+Once `PLAN.md` is final and before any code, config, or other implementation artifact is
+written or edited or a dependency is installed, **stop and request explicit human
+approval**. Gated: source edits, build/CI/IaC changes, dependency installs, and anything
+that mutates state outside the repo (deploy, cluster change, push). Not gated: `PLAN.md`,
+`CIR-LOG.md`, `AGENTS.md`, other repo markdown, and read-only operations.
 
-What the human gate DOES cover:
-- Source code edits and creation
-- Build/CI/IaC config changes
-- Dependency installs/updates
-- Any tool invocation that mutates state outside the repo (deploys, cluster
-  changes, push, etc.)
+The approval request names the `PLAN.md` section, any open `CIR-LOG.md` items, deviations
+from the ask, and the exact first step.
 
-What the human gate does NOT cover (freely allowed during planning):
-- Writing or updating `PLAN.md`
-- Writing or updating `CIR-LOG.md`
-- Writing or updating `AGENTS.md`
-- Writing or updating repo-local documentation/markdown other than code
-- Read-only operations: file reads, searches, git status/diff/log
-
-The approval request must include:
-- Pointer to `PLAN.md` (path + section)
-- Summary of open items in `CIR-LOG.md` (if any)
-- Any deviations from the original ask
-- The exact first concrete step I am about to take
-
-After approval of a task, follow-up edits within that same task may proceed
-without re-asking. Approval of task N does not pre-approve task N+1.
+Approval covers follow-up edits within that task. Approval of task N does not approve task
+N+1.
 
 ## 5. House style (carry-over from base config)
 
@@ -127,32 +112,14 @@ it goes into the home-manager flake.
 
 ## 8. Layering and conflict resolution with local AGENTS.md
 
-When working inside a repo, opencode, pi, and goose each load instruction
-files in this order:
-1. Repo-local `AGENTS.md` (walking up from cwd)
-2. This global `AGENTS.md` — `~/.config/opencode/AGENTS.md`, `~/.pi/agent/AGENTS.md`,
-   or `~/.config/goose/AGENTS.md` (goose also reads `.goosehints`)
+Both files are read in full: repo-local `AGENTS.md` first (walking up from cwd), then this
+one — `~/.config/opencode/AGENTS.md`, `~/.pi/agent/AGENTS.md`, or
+`~/.config/goose/AGENTS.md` (goose also reads `.goosehints`). Layered, not mutually
+exclusive: this file is the default behavior, the local file the project override.
 
-Both are read in full. They are layered, not mutually exclusive — the global
-file is the default behavior, the local file is the project-specific override.
-
-### When local and global agree
-No action needed; behave as instructed.
-
-### When local and global conflict
-**Stop and ask the user.** Do not guess which to follow. Use the `question`
-tool to surface the conflict, quoting the exact lines from each file and
-letting the user pick. Record the resolution in `CIR-LOG.md` so it survives
-future sessions.
-
-Conflict cases include (but are not limited to):
-- Different rules for the same workflow (e.g. planning format, DoD style)
-- Different tool/permission boundaries
-- Different commit or commit-message policies
-- Different style requirements (comments, naming, formatting)
-
-### When only one of the two covers a topic
-Apply the one that covers it. No conflict, no question.
-
-### When local rules are absent for a workflow
-Default to the global rules in this file.
+- **They agree** → behave as instructed.
+- **Only one covers the topic** → apply that one.
+- **They conflict** → stop and ask. Do not guess. Quote the exact lines from each file,
+  let the user pick with the `question` tool, and record the resolution in `CIR-LOG.md`.
+  Conflicts include planning format, DoD style, tool/permission boundaries, commit and
+  commit-message policy, and style requirements.
