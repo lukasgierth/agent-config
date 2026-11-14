@@ -18,7 +18,7 @@ Refresh every custom package derivation under `packages/` to its latest upstream
    - Default: `nix-update <package-name>` from the repo root (resolves to `packages/<name>/default.nix`).
    - If the user supplied a target version: `nix-update <package-name> --version=<ver>`.
    - If `nix-update` is not on `PATH`, run via `nix shell nixpkgs#nix-update -c nix-update ...`.
-5. **Verify.** After each update, run `nix flake check` (or `just check` if defined) to validate the new hashes before declaring success.
+5. **Verify.** After each update, build that package: `nix build .#<package>` (or `nix build -f packages/<name>` when the package is not exposed as a flake output). A wrong hash or a broken bump fails here. `nix flake check` alone does not build outputs, so it is not a substitute.
 6. **Report.** Print a table at the end:
 
    | Package | Old version | New version | Status |
@@ -27,7 +27,7 @@ Refresh every custom package derivation under `packages/` to its latest upstream
 ## Rules
 
 - Only operate on the local `packages/` directory. Never run `nix flake update` — flake inputs are handled by `just update` and are out of scope for this skill.
-- Do not introduce new dependencies. The only external tools used are `nix-update` and `nix flake check`.
+- Do not introduce new dependencies. The only external tools used are `nix-update` and `nix build`.
 - Do not commit anything. Stage the changes and report; let the user decide when and how to commit.
 - If a package has no `version` attribute, or its update cannot be automated (missing `passthru.updateScript`, pinned commit instead of tag, etc.), stop and ask the user how to proceed — do not guess a version or edit hashes by hand.
 - Surface major-version bumps separately so the user can review breaking changes before they ship.
