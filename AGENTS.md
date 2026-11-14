@@ -117,9 +117,11 @@ without re-asking. Approval of task N does not pre-approve task N+1.
 opencode's `~/.config/opencode/` (`opencode.json`, `tui.json`, `AGENTS.md`)
 and pi's `~/.pi/agent/` (`AGENTS.md`, `settings.json`) are symlinks into the
 Nix store (home-manager). goose's `~/.config/goose/AGENTS.md` is not a
-symlink but is copied there by home-manager activation. Do not edit these
-deployed copies in place — they are overwritten on the next home-manager
-switch. Surface a change to the user so it goes into the home-manager flake.
+symlink but is copied there by home-manager activation. Custom skills in
+`~/.agents/skills/<name>/SKILL.md` are home-manager symlinks into the Nix
+store as well. Do not edit these deployed copies in place — they are
+overwritten on the next home-manager switch. Surface a change to the user so
+it goes into the home-manager flake.
 
 ## 8. Layering and conflict resolution with local AGENTS.md
 

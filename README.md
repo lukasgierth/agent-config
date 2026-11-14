@@ -9,6 +9,8 @@ Personal configuration for AI coding agents — opencode, pi, and goose. Contain
 |------|-----------|
 | `AGENTS.md` | Global agent rules: planning workflow, CIR-LOG clarification loop, human gate, house style, MCP/Nix conventions, conflict resolution. Source for the global `AGENTS.md` deployed to `~/.config/opencode/AGENTS.md` and `~/.pi/agent/AGENTS.md` (home-manager) and copied to `~/.config/goose/AGENTS.md`. |
 | `skills/` | Custom skills, one directory per skill in the shared Agent Skills `<name>/SKILL.md` format, discovered by opencode, pi, and goose from `~/.agents/skills/`. |
+| `.pre-commit-config.yaml` | Conventional-commit message check plus end-of-file/trailing-whitespace fixers. Hooks are not installed automatically — see below. |
+| `.gitignore` | Ignores the local `PLAN.md` and `CIR-LOG.md` planning artifacts. |
 
 ## Skills
 
@@ -18,7 +20,7 @@ Personal configuration for AI coding agents — opencode, pi, and goose. Contain
 | `dep-audit` | Detect package manager, check for outdated/vulnerable dependencies, update, verify, and propose update commits. |
 | `git-commit-planner` | Split uncommitted changes into small focused conventional commits; always asks before committing. |
 | `nixpkgs-package` | Add a package to Nixpkgs, update one you maintain, or register as a maintainer — conventions, hashes, vet, review, AI disclosure. |
-| `release-notes` | Draft human-readable release notes from a git tag range, grouped by conventional commit type. |
+| `release-notes` | Draft human-readable release notes from a git tag range, grouped by conventional commit type; optionally appends them to `CHANGELOG.md`. |
 | `update-nix-packages` | Bump custom derivations under a flake's `packages/` to latest upstream via `nix-update`. |
 | `update-docs` | Keep Markdown docs in sync with the repo: root `AGENTS.md`/`README.md`, subfolder docs, and new READMEs for undocumented code. |
 
@@ -34,8 +36,22 @@ The global `AGENTS.md` is read by all three agents:
 Do not edit the deployed copies in place — symlinks and activation copies are
 overwritten on the next home-manager switch; change the files here.
 
-Skills are installed once and shared by all three: symlink or copy each
-`skills/<name>` directory into `~/.agents/skills/`.
+Skills are deployed the same way: home-manager links each
+`~/.agents/skills/<name>/SKILL.md` to the Nix store copy of `skills/<name>/SKILL.md`,
+and that one directory is shared by all three agents. Other skills in
+`~/.agents/skills/` come from the home-manager flake, not from this repo. As with
+`AGENTS.md`, do not edit the deployed files — they are overwritten on the next
+home-manager switch.
+
+## Pre-commit hooks
+
+`.pre-commit-config.yaml` is checked in but no hook is installed by default. To enable
+it locally:
+
+```bash
+pre-commit install                                  # whitespace, EOF fixers
+pre-commit install --hook-type commit-msg           # conventional commit messages
+```
 
 ## Editing rules
 
